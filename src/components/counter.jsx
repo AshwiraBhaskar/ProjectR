@@ -3,50 +3,48 @@ import React, { Component } from "react";
 class Counter extends Component {
   constructor(props) {
     super(props);
-
-    this.getBadgeClasses = this.getBadgeClasses.bind(this);
-    this.formatCount = this.formatCount.bind(this);
-
-    this.handleIncrement = this.handleIncrement.bind(this);
-
     this.state = {
       value: this.props.value,
       //tags: ["tag1", "tag2", "tag3"],
     };
+
+    this.getBadgeClasses = this.getBadgeClasses.bind(this);
+    this.formatCount = this.formatCount.bind(this);
+    this.handleIncrement = this.handleIncrement.bind(this);
   }
 
+
   handleIncrement() {
-    this.setState({ value: this.state.value + 1 });
+    this.setState({value: this.state.value+1})
+    this.formatCount()
+  }
+
+  getBadgeClasses() {
+    let classes = "badge m-2 bg-";
+    classes += this.state.value === 0 ? "warning" : "primary";
+    return classes;
+  }
+
+  formatCount() {
+    return this.state.value === 0 ? "Zero" : this.state.value.toString();
   }
 
   render() {
-    console.log(this.props);
     return (
-      <div>
+      <div className="m-2">
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
-        <button onClick={this.handleIncrement}>Increment</button>
+        <button  className="btn btn-light" onClick={this.handleIncrement}>Increment</button>
 
         {/* <ul>
-          {" "}
           {this.state.tags.map((tag) => (
             <li key={tag}>{tag}</li>
-          ))}{" "}
+          ))}
         </ul> */}
       </div>
     );
   }
 
-  getBadgeClasses() {
-    let classes = "badge m-2 bg-";
-    classes += this.state.count === 0 ? "warning" : "primary";
-    return classes;
-  }
 
-  formatCount() {
-    const { count } = this.state;
-
-    return count === 0 ? "Zero" : count;
-  }
 }
 
 export default Counter;
