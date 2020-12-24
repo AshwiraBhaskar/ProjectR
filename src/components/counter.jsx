@@ -16,7 +16,6 @@ class Counter extends Component {
 
   handleIncrement() {
     this.setState({value: this.state.value+1})
-    this.formatCount()
   }
 
   getBadgeClasses() {
@@ -26,7 +25,7 @@ class Counter extends Component {
   }
 
   formatCount() {
-    return this.state.value === 0 ? "Zero" : this.state.value.toString();
+    return this.state.value === 0 ? "Zero" : this.state.value;
   }
 
   render() {
