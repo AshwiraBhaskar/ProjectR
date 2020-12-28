@@ -3,40 +3,35 @@ import React, { Component } from "react";
 class Counter extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: this.props.value,
-      //tags: ["tag1", "tag2", "tag3"],
-    };
 
     this.getBadgeClasses = this.getBadgeClasses.bind(this);
     this.formatCount = this.formatCount.bind(this);
-    this.handleIncrement = this.handleIncrement.bind(this);
-  }
-
-  handleIncrement() {
-    this.setState({ value: this.state.value + 1 });
+    // this.handleIncrement = this.handleIncrement.bind(this);
   }
 
   getBadgeClasses() {
     let classes = "badge m-2 bg-";
-    classes += this.state.value === 0 ? "warning" : "primary";
+    classes += this.props.counter.value === 0 ? "warning" : "primary";
     return classes;
   }
 
   formatCount() {
-    return this.state.value === 0 ? "Zero" : this.state.value;
+    return this.props.counter.value === 0 ? "Zero" : this.props.counter.value;
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="m-2">
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
-        <button className="btn btn-light" onClick={this.handleIncrement}>
+        <button
+          onClick={() => this.props.onIncrement(this.props.counter)}
+          className="btn btn-light"
+          onClick={() => this.props.onIncrement(this.props.counter)}
+        >
           Increment
         </button>
         <button
-          onClick={() => this.props.onDelete(this.props.id)}
+          onClick={() => this.props.onDelete(this.props.counter.id)}
           className="btn btn-danger btn-sm m-2"
         >
           {" "}
